@@ -89,7 +89,7 @@ def app():
 
         clfSVM.fit(X_train, y_train)
         y_test_pred = clfSVM.predict(X_test)
-        clfSVM_trained = clfSVM
+        clfSVM_trained.fit(X_train, y_train)
         st.subheader('Performance Metrics')
         st.text(classification_report(y_test, y_test_pred))
 
