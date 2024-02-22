@@ -75,9 +75,10 @@ def app():
 
     # Create the figure and axes object
     fig, ax = plt.subplots(figsize=(9, 9))    
-    clfSVM = svm.SVC(kernel='linear', C=1000)
+    clfSVM_trained = svm.SVC(kernel='linear', C=1000)
 
     if st.button('Start'):
+        clfSVM = svm.SVC(kernel='linear', C=1000)
         centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
         X, y = make_blobs(n_samples=n_samples, n_features=2,
                         cluster_std=cluster_std, centers = centers,
@@ -88,7 +89,7 @@ def app():
 
         clfSVM.fit(X_train, y_train)
         y_test_pred = clfSVM.predict(X_test)
-
+        clf_SVM_trained = clf_SVM
         st.subheader('Performance Metrics')
         st.text(classification_report(y_test, y_test_pred))
 
@@ -122,7 +123,7 @@ def app():
             #plot support vectors
             ax.scatter(clfSVM.support_vectors_[:,0], 
                 clfSVM.support_vectors_[:,1], s=100, 
-                linewidth=3, facecolor='none', edgecolor='black')
+                linewidth=2, facecolor='none', edgecolor='black')
             
             # Plot the decision function directly on ax
             xlim = ax.get_xlim()
@@ -140,16 +141,17 @@ def app():
             ax.scatter(clfSVM.support_vectors_[:, 0], clfSVM.support_vectors_[:, 1], s=100, linewidth=1, facecolor='none')
     
             st.pyplot(fig)
-
-            input_x = st.number_input("Input the X:")
-            input_y = st.number_input("Input the Y:")
-            if st.button('Plot'): 
-                datapoint = []
-                datapoint.append([input_x, input_y])
-                predclass = clfSVM.predict(datapoint)
-                st.write('predicted class = ' + predclass)            
+    
         else :
             st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
+
+    input_x = st.number_input("Input the X:")
+    input_y = st.number_input("Input the Y:")
+    if st.button('Plot'): 
+        datapoint = []
+        datapoint.append([input_x, input_y])
+        predclass = clfSVM_trained.predict(datapoint)
+        st.write('predicted class = ' + predclass)        
 
 def generate_random_points_in_square(x_min, x_max, y_min, y_max, num_points):
     """
