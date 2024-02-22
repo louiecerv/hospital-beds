@@ -152,7 +152,7 @@ def app():
         datapoint.append([input_x, input_y])
         st.text(datapoint)
         predclass = clfSVM_trained.predict(datapoint)
-        st.write('predicted class = ' + predclass)        
+        st.text('predicted class = ' + predclass)        
 
 def generate_random_points_in_square(x_min, x_max, y_min, y_max, num_points):
     """
