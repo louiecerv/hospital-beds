@@ -143,10 +143,11 @@ def app():
             st.pyplot(fig)
         else :
             st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
-        if n_clusters==2:
-            input_x = st.number_input("Input the X:")
-            input_y = st.number_input("Input the Y:")
-            if st.button('Plot'):            
+
+    if n_clusters==2:
+        input_x = st.number_input("Input the X:")
+        input_y = st.number_input("Input the Y:")
+        if st.button('Plot'):            
             
 
 def generate_random_points_in_square(x_min, x_max, y_min, y_max, num_points):
