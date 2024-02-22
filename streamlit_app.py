@@ -77,27 +77,27 @@ def app():
     fig, ax = plt.subplots(figsize=(9, 9))    
     clfSVM_trained = svm.SVC(kernel='linear', C=1000)
 
+
+    clfSVM = svm.SVC(kernel='linear', C=1000)
+    centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
+    X, y = make_blobs(n_samples=n_samples, n_features=2,
+                    cluster_std=cluster_std, centers = centers,
+                    random_state=random_state)
+               
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+
+    clfSVM.fit(X_train, y_train)
+    y_test_pred = clfSVM.predict(X_test)
+    clfSVM_trained.fit(X_train, y_train)
+    st.subheader('Performance Metrics')
+    st.text(classification_report(y_test, y_test_pred))
+
+    st.subheader('Confusion Matrix')
+    cm = confusion_matrix(y_test, y_test_pred)
+    st.write(cm)
+    st.subheader('Visualization')
     if st.button('Start'):
-        clfSVM = svm.SVC(kernel='linear', C=1000)
-        centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
-        X, y = make_blobs(n_samples=n_samples, n_features=2,
-                        cluster_std=cluster_std, centers = centers,
-                        random_state=random_state)
-                   
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-
-        clfSVM.fit(X_train, y_train)
-        y_test_pred = clfSVM.predict(X_test)
-        clfSVM_trained.fit(X_train, y_train)
-        st.subheader('Performance Metrics')
-        st.text(classification_report(y_test, y_test_pred))
-
-        st.subheader('Confusion Matrix')
-        cm = confusion_matrix(y_test, y_test_pred)
-        st.write(cm)
-        st.subheader('Visualization')
-
         if n_clusters == 2:
             #use the Numpy array to merge the data and test columns
             dataset = np.column_stack((X, y))
