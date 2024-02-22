@@ -111,7 +111,6 @@ def app():
 
     
             # Scatter plot of the data
-            #ax.scatter(X[:, 0], X[:, 1], c=y, s=30, cmap=plt.cm.Paired)
             sns.scatterplot(
                 x = "X",
                 y = "Y",
@@ -121,6 +120,11 @@ def app():
                 ax=ax  # Specify the axes object
             )          
 
+            #plot support vectors
+            ax.scatter(clfSVM.support_vectors_[:,0], 
+                clfSVM.support_vectors_[:,1], s=100, 
+                linewidth=3, facecolor='none', edgecolor='black')
+            
             # Plot the decision function directly on ax
             xlim = ax.get_xlim()
             ylim = ax.get_ylim()
