@@ -75,7 +75,8 @@ def app():
 
     # Create the figure and axes object
     fig, ax = plt.subplots(figsize=(9, 9))    
-    
+    clfSVM = svm.SVC(kernel='linear', C=1000)
+
     if st.button('Start'):
         centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
         X, y = make_blobs(n_samples=n_samples, n_features=2,
@@ -84,7 +85,7 @@ def app():
                    
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-        clfSVM = svm.SVC(kernel='linear', C=1000)
+
         clfSVM.fit(X_train, y_train)
         y_test_pred = clfSVM.predict(X_test)
 
@@ -148,7 +149,9 @@ def app():
         input_x = st.number_input("Input the X:")
         input_y = st.number_input("Input the Y:")
         if st.button('Plot'): 
-            st.write('Plot!')           
+            newpoint = [[input_x, input_y]]           
+            predclass = clfSVM.predict(newpoint)
+            st.write('predicted class = ' + predclass)
             
 
 def generate_random_points_in_square(x_min, x_max, y_min, y_max, num_points):
