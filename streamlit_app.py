@@ -150,7 +150,7 @@ def app():
     if st.button('Plot'): 
         datapoint = []
         datapoint.append([input_x, input_y])
-        st,text(datapoint)
+        st.text(datapoint)
         predclass = clfSVM_trained.predict(datapoint)
         st.write('predicted class = ' + predclass)        
 
