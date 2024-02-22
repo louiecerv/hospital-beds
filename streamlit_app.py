@@ -72,6 +72,9 @@ def app():
         max_value=6,
         value=2,  # Initial value
     )
+
+    # Create the figure and axes object
+    fig, ax = plt.subplots(figsize=(9, 9))    
     
     if st.button('Start'):
         centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
@@ -105,8 +108,7 @@ def app():
             y = df['Y']
             classes = df['Class'].unique()
 
-            # Create the figure and axes object
-            fig, ax = plt.subplots(figsize=(9, 9))
+
     
             # Scatter plot of the data
             #ax.scatter(X[:, 0], X[:, 1], c=y, s=30, cmap=plt.cm.Paired)
