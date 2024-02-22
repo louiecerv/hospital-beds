@@ -140,17 +140,18 @@ def app():
             ax.scatter(clfSVM.support_vectors_[:, 0], clfSVM.support_vectors_[:, 1], s=100, linewidth=1, facecolor='none')
     
             st.pyplot(fig)
+
+            input_x = st.number_input("Input the X:")
+            input_y = st.number_input("Input the Y:")
+            if st.button('Plot'): 
+                datapoint = []
+                datapoint.append([input_x, input_y])
+                predclass = clfSVM.predict(datapoint)
+                st.write('predicted class = ' + predclass)            
         else :
             st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
 
-    if n_clusters==2:
-        input_x = st.number_input("Input the X:")
-        input_y = st.number_input("Input the Y:")
-        if st.button('Plot'): 
-            datapoint = []
-            datapoint.append([input_x, input_y])
-            predclass = clfSVM.predict(datapoint)
-            st.write('predicted class = ' + predclass)
+
             
 
 def generate_random_points_in_square(x_min, x_max, y_min, y_max, num_points):
