@@ -108,8 +108,6 @@ def app():
             x = df['X']
             y = df['Y']
             classes = df['Class'].unique()
-
-
     
             # Scatter plot of the data
             sns.scatterplot(
