@@ -147,7 +147,8 @@ def app():
     if n_clusters==2:
         input_x = st.number_input("Input the X:")
         input_y = st.number_input("Input the Y:")
-        if st.button('Plot'):            
+        if st.button('Plot'): 
+            st.write('Plot!')           
             
 
 def generate_random_points_in_square(x_min, x_max, y_min, y_max, num_points):
