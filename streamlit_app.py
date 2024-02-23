@@ -73,7 +73,7 @@ def app():
         value=2,  # Initial value
     )
 
-    clfSVM_trained = svm.SVC(kernel='linear', C=1000)
+    #clfSVM_trained = svm.SVC(kernel='linear', C=1000)
     clfSVM = svm.SVC(kernel='linear', C=1000)
     centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
     X, y = make_blobs(n_samples=n_samples, n_features=2,
@@ -84,7 +84,7 @@ def app():
 
     clfSVM.fit(X_train, y_train)
     y_test_pred = clfSVM.predict(X_test)
-    clfSVM_trained.fit(X_train, y_train)
+    #clfSVM_trained.fit(X_train, y_train)
     st.subheader('Performance Metrics')
     st.text(classification_report(y_test, y_test_pred))
 
@@ -95,12 +95,12 @@ def app():
     #use the Numpy array to merge the data and test columns
     dataset = np.column_stack((X, y))
     df = pd.DataFrame(dataset)
-    visualizer(df)
+    visualizer(df, clfSVM)
 
     st.subheader('Visualization')
     if st.button('Start'):
         if n_clusters == 2:
-            visualizer(df)
+            visualizer(df, clfSVM)
         else :
             st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
 
@@ -111,11 +111,11 @@ def app():
             datapoint = []
             datapoint.append([input_x, input_y])
             st.text(datapoint)
-            predclass = clfSVM_trained.predict(datapoint)
+            predclass = clfSVM.predict(datapoint)
             st.text('predicted class = ' + str(predclass))    
-            visualizer(df)    
+            visualizer(df, clfSVM)    
 
-def visualizer(df):
+def visualizer(df, clfSVM):
    # Create the figure and axes object
     fig, ax = plt.subplots(figsize=(9, 9))    
 
