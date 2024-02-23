@@ -73,18 +73,23 @@ def app():
         value=2,  # Initial value
     )
 
-    #clfSVM_trained = svm.SVC(kernel='linear', C=1000)
-    clfSVM = svm.SVC(kernel='linear', C=1000)
-    centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
-    X, y = make_blobs(n_samples=n_samples, n_features=2,
-                    cluster_std=cluster_std, centers = centers,
-                    random_state=random_state)
-               
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    button_clicked = False
 
-    clfSVM.fit(X_train, y_train)
-    y_test_pred = clfSVM.predict(X_test)
-    #clfSVM_trained.fit(X_train, y_train)
+    if st.button("Generate new Data"):
+        button_clicked = True
+
+    if button_clicked == True:
+        clfSVM = svm.SVC(kernel='linear', C=1000)
+        centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
+        X, y = make_blobs(n_samples=n_samples, n_features=2,
+                        cluster_std=cluster_std, centers = centers,
+                        random_state=random_state)
+                
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+        clfSVM.fit(X_train, y_train)
+        y_test_pred = clfSVM.predict(X_test)    
+    
     st.subheader('Performance Metrics')
     st.text(classification_report(y_test, y_test_pred))
 
