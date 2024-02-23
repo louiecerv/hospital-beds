@@ -73,8 +73,7 @@ def app():
         value=2,  # Initial value
     )
 
-   clfSVM_trained = svm.SVC(kernel='linear', C=1000)
-
+    clfSVM_trained = svm.SVC(kernel='linear', C=1000)
     clfSVM = svm.SVC(kernel='linear', C=1000)
     centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
     X, y = make_blobs(n_samples=n_samples, n_features=2,
@@ -119,7 +118,7 @@ def app():
 def visualizer(df):
    # Create the figure and axes object
     fig, ax = plt.subplots(figsize=(9, 9))    
-        
+
    # Add column names to the DataFrame
     df = df.rename(columns={0: 'X', 1: 'Y', 2: 'Class'})
     # Extract data and classes
