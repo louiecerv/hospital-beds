@@ -97,13 +97,6 @@ def app():
     df = pd.DataFrame(dataset)
     visualizer(df, clfSVM)
 
-    st.subheader('Visualization')
-    if st.button('Start'):
-        if n_clusters == 2:
-            visualizer(df, clfSVM)
-        else :
-            st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
-
     if n_clusters == 2:
         input_x = st.number_input("Input the X:")
         input_y = st.number_input("Input the Y:")
@@ -114,12 +107,15 @@ def app():
             predclass = clfSVM.predict(datapoint)
             st.text('predicted class = ' + str(predclass))    
             visualizer(df, clfSVM)    
+    else :
+        st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
 
 def visualizer(df, clfSVM):
-   # Create the figure and axes object
+    st.subheader('Visualization')
+    # Create the figure and axes object
     fig, ax = plt.subplots(figsize=(9, 9))    
 
-   # Add column names to the DataFrame
+    # Add column names to the DataFrame
     df = df.rename(columns={0: 'X', 1: 'Y', 2: 'Class'})
     # Extract data and classes
     x = df['X']
