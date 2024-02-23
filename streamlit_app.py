@@ -48,6 +48,8 @@ def app():
     their true and predicted classes. Decision boundary overlayed on the plot. 
     Performance metrics displayed dynamically as cluster overlap changes.""")
 
+    allowupdate = True
+
     # Create a slider with a label and initial value
     n_samples = st.slider(
         label="Number of samples (200 to 4000):",
@@ -73,16 +75,21 @@ def app():
         value=2,  # Initial value
     )
 
-    clfSVM = svm.SVC(kernel='linear', C=1000)
-    centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
-    X, y = make_blobs(n_samples=n_samples, n_features=2,
-                    cluster_std=cluster_std, centers = centers,
-                    random_state=random_state)
-            
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    clfSVM = []
+    y_test_pred = []
 
-    clfSVM.fit(X_train, y_train)
-    y_test_pred = clfSVM.predict(X_test)    
+    if allowupdate==True:
+        clfSVM = svm.SVC(kernel='linear', C=1000)
+        centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
+        X, y = make_blobs(n_samples=n_samples, n_features=2,
+                        cluster_std=cluster_std, centers = centers,
+                        random_state=random_state)
+                
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+        clfSVM.fit(X_train, y_train)
+        y_test_pred = clfSVM.predict(X_test)    
+        allowupdate = False
     
     st.subheader('Performance Metrics')
     st.text(classification_report(y_test, y_test_pred))
