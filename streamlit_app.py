@@ -96,63 +96,70 @@ def app():
     st.subheader('Confusion Matrix')
     cm = confusion_matrix(y_test, y_test_pred)
     st.write(cm)
+
+    #use the Numpy array to merge the data and test columns
+    dataset = np.column_stack((X, y))
+    df = pd.DataFrame(dataset)
+    visualizer(df)
+
     st.subheader('Visualization')
     if st.button('Start'):
         if n_clusters == 2:
-            #use the Numpy array to merge the data and test columns
-            dataset = np.column_stack((X, y))
-
-            df = pd.DataFrame(dataset)
-            # Add column names to the DataFrame
-            df = df.rename(columns={0: 'X', 1: 'Y', 2: 'Class'})
-            # Extract data and classes
-            x = df['X']
-            y = df['Y']
-            classes = df['Class'].unique()
-    
-            # Scatter plot of the data
-            sns.scatterplot(
-                x = "X",
-                y = "Y",
-                hue = "Class",
-                data = df,
-                palette="Set1",
-                ax=ax  # Specify the axes object
-            )          
-
-            #plot support vectors
-            ax.scatter(clfSVM.support_vectors_[:,0], 
-                clfSVM.support_vectors_[:,1], s=100, 
-                linewidth=2, facecolor='none', edgecolor='black')
-            
-            # Plot the decision function directly on ax
-            xlim = ax.get_xlim()
-            ylim = ax.get_ylim()
-
-            xx = np.linspace(xlim[0], xlim[1], 30)
-            yy = np.linspace(ylim[0], ylim[1], 30)
-            YY, XX = np.meshgrid(yy, xx)
-            xy = np.vstack([XX.ravel(), YY.ravel()]).T
-            Z = clfSVM.decision_function(xy).reshape(XX.shape)
-    
-            ax.contour(XX, YY, Z, colors='k', levels=[-1, 0, 1], alpha=0.5, linestyles=['--', '--', '--'])
-    
-            # Plot support vectors
-            ax.scatter(clfSVM.support_vectors_[:, 0], clfSVM.support_vectors_[:, 1], s=100, linewidth=1, facecolor='none')
-    
-            st.pyplot(fig)
-    
+            visualizer(df)
         else :
             st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
 
-    input_x = st.number_input("Input the X:")
-    input_y = st.number_input("Input the Y:")
-    if st.button('Plot'): 
-        datapoint = []
-        datapoint.append([input_x, input_y])
-        st.text(datapoint)
-        predclass = clfSVM_trained.predict(datapoint)
-        st.text('predicted class = ' + str(predclass))        
+    if n_clusters == 2:
+        input_x = st.number_input("Input the X:")
+        input_y = st.number_input("Input the Y:")
+        if st.button('Plot'): 
+            datapoint = []
+            datapoint.append([input_x, input_y])
+            st.text(datapoint)
+            predclass = clfSVM_trained.predict(datapoint)
+            st.text('predicted class = ' + str(predclass))    
+            visualizer(df)    
+
+def visualizer(df):
+   # Add column names to the DataFrame
+    df = df.rename(columns={0: 'X', 1: 'Y', 2: 'Class'})
+    # Extract data and classes
+    x = df['X']
+    y = df['Y']
+    classes = df['Class'].unique()
+    # Scatter plot of the data
+    sns.scatterplot(
+        x = "X",
+        y = "Y",
+        hue = "Class",
+        data = df,
+        palette="Set1",
+        ax=ax  # Specify the axes object
+    )          
+
+    #plot support vectors
+    ax.scatter(clfSVM.support_vectors_[:,0], 
+        clfSVM.support_vectors_[:,1], s=100, 
+        linewidth=2, facecolor='none', edgecolor='black')
+    
+    # Plot the decision function directly on ax
+    xlim = ax.get_xlim()
+    ylim = ax.get_ylim()
+
+    xx = np.linspace(xlim[0], xlim[1], 30)
+    yy = np.linspace(ylim[0], ylim[1], 30)
+    YY, XX = np.meshgrid(yy, xx)
+    xy = np.vstack([XX.ravel(), YY.ravel()]).T
+    Z = clfSVM.decision_function(xy).reshape(XX.shape)
+
+    ax.contour(XX, YY, Z, colors='k', levels=[-1, 0, 1], alpha=0.5, linestyles=['--', '--', '--'])
+
+    # Plot support vectors
+    ax.scatter(clfSVM.support_vectors_[:, 0], clfSVM.support_vectors_[:, 1], s=100, linewidth=1, facecolor='none')
+
+    st.pyplot(fig)
+
+    return
 
 def generate_random_points_in_square(x_min, x_max, y_min, y_max, num_points):
     """
