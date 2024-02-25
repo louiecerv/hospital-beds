@@ -13,7 +13,7 @@ from sklearn.metrics import classification_report
 
 # Define the Streamlit app
 def app():
-    st.sesson_state['new_clusters'] = False
+    st.session_state['new_clusters'] = False
 
     # Display the DataFrame with formatting
     st.title("Support Vector Machine Classifier")
@@ -84,9 +84,9 @@ def app():
     X = []
     y = []
     if st.button('Start'): 
-       st.sesson_state['new_clusters'] = True 
+       st.session_state['new_clusters'] = True 
 
-    if st.sesson_state['new_clusters'] == True:
+    if st.session_state['new_clusters'] == True:
         centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
         X, y = make_blobs(n_samples=n_samples, n_features=2,
                     cluster_std=cluster_std, centers = centers,
@@ -109,7 +109,7 @@ def app():
         df = pd.DataFrame(dataset)
         visualizer(df, clfSVM)
 
-        st.sesson_state['new_clusters'] = False
+        st.session_state['new_clusters'] = False
 
         if n_clusters == 2:
             input_x = st.number_input("Input the X:")
