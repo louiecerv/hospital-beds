@@ -13,6 +13,8 @@ from sklearn.metrics import classification_report
 
 # Define the Streamlit app
 def app():
+    st.sesson_state['new_clusters'] = False
+
     # Display the DataFrame with formatting
     st.title("Support Vector Machine Classifier")
     text = """Louie F. Cervantes, M.Eng. \n\n
@@ -34,21 +36,23 @@ def app():
     """
     st.write(text)
     st.write('Key Features:')
+
     st.write("""Dataset Generation:
-    Randomly generates data points belonging to two clusters using user-defined settings:
-    Number of clusters
-    Number of data points per cluster
-    Cluster means and standard deviations
-    Overlap control (overlap_factor) to adjust cluster spread""")
+        Randomly generates data points belonging to two clusters using user-defined settings:
+        Number of clusters
+        Number of data points per cluster
+        Cluster means and standard deviations
+        Overlap control (overlap_factor) to adjust cluster spread""")
+    
     st.write('SVM Classification:')
+    
     st.write("""Trains an SVM model with the chosen kernel (linear or radial basis function) and hyperparameters.
     Evaluates the model's performance using accuracy, precision, recall, and F1-score.""")
+        
     st.write('Visualization:')
     st.write("""Interactive scatter plot displaying data points colored by 
-    their true and predicted classes. Decision boundary overlayed on the plot. 
-    Performance metrics displayed dynamically as cluster overlap changes.""")
-
-    allowupdate = True
+        their true and predicted classes. Decision boundary overlayed on the plot. 
+        Performance metrics displayed dynamically as cluster overlap changes.""")
 
     # Create a slider with a label and initial value
     n_samples = st.slider(
@@ -79,43 +83,46 @@ def app():
     centers = []
     X = []
     y = []
+    if st.button('Plot'): 
+       st.sesson_state['new_clusters'] = True 
 
-    if allowupdate==True:
+    if st.sesson_state['new_clusters'] == True:
         centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
         X, y = make_blobs(n_samples=n_samples, n_features=2,
                     cluster_std=cluster_std, centers = centers,
                     random_state=random_state)
             
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    clfSVM.fit(X_train, y_train)
-    y_test_pred = clfSVM.predict(X_test)    
-    allowupdate = False
+        clfSVM.fit(X_train, y_train)
+        y_test_pred = clfSVM.predict(X_test)    
     
-    st.subheader('Performance Metrics')
-    st.text(classification_report(y_test, y_test_pred))
+        st.subheader('Performance Metrics')
+        st.text(classification_report(y_test, y_test_pred))
 
-    st.subheader('Confusion Matrix')
-    cm = confusion_matrix(y_test, y_test_pred)
-    st.write(cm)
+        st.subheader('Confusion Matrix')
+        cm = confusion_matrix(y_test, y_test_pred)
+        st.write(cm)
 
-    #use the Numpy array to merge the data and test columns
-    dataset = np.column_stack((X, y))
-    df = pd.DataFrame(dataset)
-    visualizer(df, clfSVM)
+        #use the Numpy array to merge the data and test columns
+        dataset = np.column_stack((X, y))
+        df = pd.DataFrame(dataset)
+        visualizer(df, clfSVM)
+        
+        st.sesson_state['new_clusters'] = False
 
-    if n_clusters == 2:
-        input_x = st.number_input("Input the X:")
-        input_y = st.number_input("Input the Y:")
-        if st.button('Plot'): 
-            datapoint = []
-            datapoint.append([input_x, input_y])
-            st.text(datapoint)
-            predclass = clfSVM.predict(datapoint)
-            st.text('predicted class = ' + str(predclass))    
-            visualizer(df, clfSVM)    
-    else :
-        st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
+        if n_clusters == 2:
+            input_x = st.number_input("Input the X:")
+            input_y = st.number_input("Input the Y:")
+            if st.button('Plot'): 
+                datapoint = []
+                datapoint.append([input_x, input_y])
+                st.text(datapoint)
+                predclass = clfSVM.predict(datapoint)
+                st.text('predicted class = ' + str(predclass))    
+                visualizer(df, clfSVM)    
+        else :
+            st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
 
 def visualizer(df, clfSVM):
     st.subheader('Visualization')
