@@ -83,7 +83,7 @@ def app():
     centers = []
     X = []
     y = []
-    if st.button('Plot'): 
+    if st.button('Start'): 
        st.sesson_state['new_clusters'] = True 
 
     if st.sesson_state['new_clusters'] == True:
@@ -108,7 +108,7 @@ def app():
         dataset = np.column_stack((X, y))
         df = pd.DataFrame(dataset)
         visualizer(df, clfSVM)
-        
+
         st.sesson_state['new_clusters'] = False
 
         if n_clusters == 2:
