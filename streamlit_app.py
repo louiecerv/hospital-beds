@@ -96,33 +96,32 @@ def app():
 
         clfSVM.fit(X_train, y_train)
         y_test_pred = clfSVM.predict(X_test)    
-    
-        st.subheader('Performance Metrics')
-        st.text(classification_report(y_test, y_test_pred))
-
-        st.subheader('Confusion Matrix')
-        cm = confusion_matrix(y_test, y_test_pred)
-        st.write(cm)
-
-        #use the Numpy array to merge the data and test columns
-        dataset = np.column_stack((X, y))
-        df = pd.DataFrame(dataset)
-        visualizer(df, clfSVM)
-
         st.session_state['new_clusters'] = False
 
-        if n_clusters == 2:
-            input_x = st.number_input("Input the X:")
-            input_y = st.number_input("Input the Y:")
-            if st.button('Plot'): 
-                datapoint = []
-                datapoint.append([input_x, input_y])
-                st.text(datapoint)
-                predclass = clfSVM.predict(datapoint)
-                st.text('predicted class = ' + str(predclass))    
-                visualizer(df, clfSVM)    
-        else :
-            st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
+    st.subheader('Performance Metrics')
+    st.text(classification_report(y_test, y_test_pred))
+
+    st.subheader('Confusion Matrix')
+    cm = confusion_matrix(y_test, y_test_pred)
+    st.write(cm)
+
+    #use the Numpy array to merge the data and test columns
+    dataset = np.column_stack((X, y))
+    df = pd.DataFrame(dataset)
+    visualizer(df, clfSVM)
+
+    if n_clusters == 2:
+        input_x = st.number_input("Input the X:")
+        input_y = st.number_input("Input the Y:")
+        if st.button('Plot'): 
+            datapoint = []
+            datapoint.append([input_x, input_y])
+            st.text(datapoint)
+            predclass = clfSVM.predict(datapoint)
+            st.text('predicted class = ' + str(predclass))    
+            visualizer(df, clfSVM)    
+    else :
+        st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
 
 def visualizer(df, clfSVM):
     st.subheader('Visualization')
