@@ -126,7 +126,7 @@ def app():
             st.text(datapoint)
             predclass = clfSVM.predict(datapoint)
             st.text('predicted class = ' + str(predclass))    
-            visualizer(df, st.session_state['clfSVM'])    
+            #visualizer(df, st.session_state['clfSVM'])    
     else :
         st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
 
