@@ -115,7 +115,9 @@ def app():
     #use the Numpy array to merge the data and test columns
     dataset = np.column_stack((X, y))
     df = pd.DataFrame(dataset)
-    visualizer(df, st.session_state['clfSVM'])
+    clfSVM = st.session_state['clfSVM']
+    
+    visualizer(df, clfSVM)
 
     if n_clusters == 2:
         input_x = st.number_input("Input the X:")
