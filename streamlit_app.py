@@ -115,9 +115,8 @@ def app():
     #use the Numpy array to merge the data and test columns
     dataset = np.column_stack((X, y))
     df = pd.DataFrame(dataset)
-    clfSVM = st.session_state['clfSVM']
-    
-    visualizer(df, clfSVM)
+
+    visualizer(df, st.session_state['clfSVM'])
 
     if n_clusters == 2:
         input_x = st.number_input("Input the X:")
@@ -126,9 +125,9 @@ def app():
             datapoint = []
             datapoint.append([input_x, input_y])
             st.text(datapoint)
-            predclass = clfSVM.predict(datapoint)
+            predclass = st.session_state['clfSVM'].predict(datapoint)
             st.text('predicted class = ' + str(predclass))    
-            #visualizer(df, st.session_state['clfSVM'])    
+            visualizer(df, st.session_state['clfSVM'])    
     else :
         st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
 
