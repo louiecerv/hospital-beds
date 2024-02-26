@@ -83,6 +83,11 @@ def app():
     centers = []
     X = []
     y = []
+    X_train = []
+    X_test = []
+    y_train []
+    y_test = []
+
     if st.button('Start'): 
        st.session_state['new_clusters'] = True 
 
@@ -110,18 +115,18 @@ def app():
         df = pd.DataFrame(dataset)
         visualizer(df, clfSVM)
 
-        if n_clusters == 2:
-            input_x = st.number_input("Input the X:")
-            input_y = st.number_input("Input the Y:")
-            if st.button('Plot'): 
-                datapoint = []
-                datapoint.append([input_x, input_y])
-                st.text(datapoint)
-                predclass = clfSVM.predict(datapoint)
-                st.text('predicted class = ' + str(predclass))    
-                visualizer(df, clfSVM)    
-        else :
-            st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
+    if n_clusters == 2:
+        input_x = st.number_input("Input the X:")
+        input_y = st.number_input("Input the Y:")
+        if st.button('Plot'): 
+            datapoint = []
+            datapoint.append([input_x, input_y])
+            st.text(datapoint)
+            predclass = clfSVM.predict(datapoint)
+            st.text('predicted class = ' + str(predclass))    
+            visualizer(df, clfSVM)    
+    else :
+        st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
 
 def visualizer(df, clfSVM):
     st.subheader('Visualization')
