@@ -129,7 +129,8 @@ def app():
             datapoint = []
             datapoint.append([input_x, input_y])
             st.text(datapoint)
-            predclass = st.session_state['clfSVM'].predict(datapoint)
+            clfSVM = st.session_state['clfSVM']
+            predclass = clfSVM.predict(datapoint)
             st.text('predicted class = ' + str(predclass))    
             visualizer(df, st.session_state['clfSVM'])    
     else :
