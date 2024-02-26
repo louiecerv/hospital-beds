@@ -89,7 +89,7 @@ def app():
     y_train = []
     y_test = []
     y_test_pred = []
-    
+
     if st.button('Start'): 
        st.session_state['new_clusters'] = True 
 
@@ -105,12 +105,12 @@ def app():
         y_test_pred = st.session_state['clfSVM'].predict(X_test)    
         st.session_state['new_clusters'] = False
 
-    st.subheader('Performance Metrics')
-    st.text(classification_report(y_test, y_test_pred))
+        st.subheader('Performance Metrics')
+        st.text(classification_report(y_test, y_test_pred))
 
-    st.subheader('Confusion Matrix')
-    cm = confusion_matrix(y_test, y_test_pred)
-    st.write(cm)
+        st.subheader('Confusion Matrix')
+        cm = confusion_matrix(y_test, y_test_pred)
+        st.write(cm)
 
     #use the Numpy array to merge the data and test columns
     dataset = np.column_stack((X, y))
