@@ -94,8 +94,8 @@ def app():
        st.session_state['new_clusters'] = True 
 
     if st.session_state['new_clusters'] == True:
-        st.session_state['clfSVM'] = svm.SVC(kernel='linear', C=1000)
-        
+        clfSVM = svm.SVC(kernel='linear', C=1000)
+
         centers = generate_random_points_in_square(-4, 4, -4, 4, n_clusters)
         X, y = make_blobs(n_samples=n_samples, n_features=2,
                     cluster_std=cluster_std, centers = centers,
@@ -103,9 +103,10 @@ def app():
             
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-        st.session_state['clfSVM'].fit(X_train, y_train)
-        y_test_pred = st.session_state['clfSVM'].predict(X_test)
+        clfSVM.fit(X_train, y_train)
+        y_test_pred = cmfSVM.predict(X_test)
 
+        st.session_state['clfSVM'] = clfSVM
         st.session_state['new_clusters'] = False
 
         st.subheader('Performance Metrics')
