@@ -104,7 +104,7 @@ def app():
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
         clfSVM.fit(X_train, y_train)
-        y_test_pred = cmfSVM.predict(X_test)
+        y_test_pred = clfSVM.predict(X_test)
 
         st.session_state['clfSVM'] = clfSVM
         st.session_state['new_clusters'] = False
