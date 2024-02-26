@@ -112,11 +112,11 @@ def app():
         cm = confusion_matrix(y_test, y_test_pred)
         st.write(cm)
 
-    #use the Numpy array to merge the data and test columns
-    dataset = np.column_stack((X, y))
-    df = pd.DataFrame(dataset)
+        #use the Numpy array to merge the data and test columns
+        dataset = np.column_stack((X, y))
+        df = pd.DataFrame(dataset)
 
-    visualizer(df, st.session_state['clfSVM'])
+        visualizer(df, st.session_state['clfSVM'])
 
     if n_clusters == 2:
         input_x = st.number_input("Input the X:")
