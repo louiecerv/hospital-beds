@@ -79,7 +79,8 @@ def app():
         value=2,  # Initial value
     )
 
-    clfSVM = svm.SVC(kernel='linear', C=1000)
+    st.session_state['clfSVM'] = svm.SVC(kernel='linear', C=1000)
+
     centers = []
     X = []
     y = []
@@ -99,8 +100,8 @@ def app():
             
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-        clfSVM.fit(X_train, y_train)
-        y_test_pred = clfSVM.predict(X_test)    
+        st.session_state['clfSVM'].fit(X_train, y_train)
+        y_test_pred = st.session_state['clfSVM'].predict(X_test)    
         st.session_state['new_clusters'] = False
 
         st.subheader('Performance Metrics')
@@ -113,7 +114,7 @@ def app():
         #use the Numpy array to merge the data and test columns
         dataset = np.column_stack((X, y))
         df = pd.DataFrame(dataset)
-        visualizer(df, clfSVM)
+        visualizer(df, st.session_state['clfSVM'])
 
     if n_clusters == 2:
         input_x = st.number_input("Input the X:")
@@ -124,7 +125,7 @@ def app():
             st.text(datapoint)
             predclass = clfSVM.predict(datapoint)
             st.text('predicted class = ' + str(predclass))    
-            visualizer(df, clfSVM)    
+            visualizer(df, st.session_state['clfSVM'])    
     else :
         st.write('Support vectors of n_classes > 2 cannot be plotted on a 2D graph.')
 
