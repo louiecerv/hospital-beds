@@ -88,7 +88,8 @@ def app():
     X_test = []
     y_train = []
     y_test = []
-
+    y_test_pred = []
+    
     if st.button('Start'): 
        st.session_state['new_clusters'] = True 
 
