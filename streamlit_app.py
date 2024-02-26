@@ -85,7 +85,7 @@ def app():
     y = []
     X_train = []
     X_test = []
-    y_train []
+    y_train = []
     y_test = []
 
     if st.button('Start'): 
