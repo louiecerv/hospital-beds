@@ -111,6 +111,28 @@ def display_form2():
     form2.write("""Figure 1. The data shows that the debtors are almost equal between 
     those that paid their loans (yes) and those that did not (no).""")
 
+    # Create a figure and an axis
+    fig, ax = plt.subplots(figsize=(6, 6))
+
+    # Create a scatter plot with color based on species
+    sns.scatterplot(
+        x="initial payment",
+        y="credit score",
+        hue="result",
+        palette="bright",
+        data=df,
+        ax=ax,
+    )
+    # Add labels and title
+    ax.set_xlabel("Sepal Width (cm)")
+    ax.set_ylabel("Sepal Length (cm)")
+    ax.set_title("Debtors Payment Status")
+
+    # Add legend
+    plt.legend(title="Paid the Loan")
+
+    # Show the plot
+    form2.pyplot(fig)
 
     # Create and train the Decision Tree Classifier   
     clf = DecisionTreeClassifier(random_state=100, max_depth=3, min_samples_leaf=5)
