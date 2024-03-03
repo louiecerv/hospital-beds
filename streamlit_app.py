@@ -58,8 +58,18 @@ def display_form1():
     West Visayas State University"""
     form1.text(text)
                 
-    form1.write('Replace with the actual description')        
-    #insert the rest of the information here
+    form1.subheader('The Decision Tree Algorithm')
+    text = """The decision tree algorithm is a supervised learning technique 
+    used for both classification and regression tasks. It works by building 
+    a tree-like model with:
+    Nodes: These represent features (or questions) from your data.
+    Branches: These represent the possible answers to those features (like "yes" or "no").
+    Leaves: These represent the final predictions (like "spam" or "not spam").
+    The algorithm builds the tree by recursively splitting the data based on 
+    the feature that best separates the data points into distinct groups. 
+    This process continues until the data points at each leaf are sufficiently 
+    similar, or some other stopping criteria is met."""
+    form1.write(text)
 
     submit1 = form1.form_submit_button("Start")
 
