@@ -15,8 +15,6 @@ def app():
     if "reset_app" not in st.session_state:
         st.session_state.reset_app = False
 
-    st.title('Predicting Housing Cost using the SVM Regressor')
-
     # Use session state to track the current form
     if "current_form" not in st.session_state:
         st.session_state["current_form"] = 1    
