@@ -76,8 +76,9 @@ def display_form2():
     ax.set_title('Distribution of Paid/Not Paid')
     # Display the plot using Streamlit
     form2.pyplot(fig)
-
-
+    form2.write("""The data shows that the debtors are almost equal between 
+    those that paid their loans (yes) and those that did not (no).""")
+    
     X_train, X_test, y_train, y_test = train_test_split( X, y, test_size = 0.2, random_state = 42)
 
     clf = DecisionTreeClassifier(random_state=100, max_depth=3, min_samples_leaf=5)
