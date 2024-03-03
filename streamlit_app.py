@@ -74,15 +74,14 @@ def display_form2():
 
     y_test_pred = clf.predict(X_test)
 
-    st.subheader('Confusion Matrix')
+    form2.subheader('Confusion Matrix')
     cm = confusion_matrix(y_test, y_test_pred)
-    st.text(cm)
+    form2.text(cm)
 
-    st.subheader('Performance Metrics')
-    st.text(classification_report(y_test, y_test_pred))
+    form2.subheader('Performance Metrics')
+    form2.text(classification_report(y_test, y_test_pred))
         
-    submit2 = form2.form_submit_button("Train")
-
+    submit2 = form2.form_submit_button("Predict")
     if submit2:        
         display_form3()
 
