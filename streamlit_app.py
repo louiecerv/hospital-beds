@@ -177,8 +177,8 @@ def display_form3():
         test_data_scaled =scaler.transform(user_inputs)
         test_data_scaled = np.array(test_data_scaled)
 
-        form3.write('Test data = ' + str(user_inputs))
-        form3.write('Test data scaled = ' + str(test_data_scaled))
+        form3.write(user_inputs)
+        form3.write(test_data_scaled)
 
     submit3 = form3.form_submit_button("Reset")
     if submit3:
