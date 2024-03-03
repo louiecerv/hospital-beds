@@ -20,6 +20,9 @@ def app():
     if "scaler" not in st.session_state:
         st.session_state["scaler"] = StandardScaler()
 
+    if "clf" not in st.session_state:
+        st.session_state["clf"] = []
+
     # Use session state to track the current form
     if "current_form" not in st.session_state:
         st.session_state["current_form"] = 1    
@@ -75,11 +78,15 @@ def display_form2():
     X = df.drop('result', axis=1)  # Target variable column name
     y = df['result']
     
+    # Split data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
     # Standardize features using StandardScaler (recommended)
     scaler = st.session_state["scaler"] 
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
 
+    #save the scaler object for later use in prediction
     st.session_state["scaler"] = scaler
     
     fig, ax = plt.subplots(figsize=(6, 2))
@@ -94,12 +101,14 @@ def display_form2():
     form2.write("""Figure 1. The data shows that the debtors are almost equal between 
     those that paid their loans (yes) and those that did not (no).""")
 
-    X_train, X_test, y_train, y_test = train_test_split( X, y, test_size = 0.2, random_state = 42)
 
+    # Create and train the Decision Tree Classifier   
     clf = DecisionTreeClassifier(random_state=100, max_depth=3, min_samples_leaf=5)
-    clf.fit(X_train, y_train)
+    clf.fit(X_train_scaled, y_train)
+    st.session_state["clf"] = clf
 
-    y_test_pred = clf.predict(X_test)
+    # Make predictions on the test set
+    y_test_pred = clf.predict(X_test_scaled)
 
     form2.subheader('Confusion Matrix')
     cm = confusion_matrix(y_test, y_test_pred)
