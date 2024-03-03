@@ -172,8 +172,9 @@ def display_form3():
     form3.slider('house_number').value = 4000
 
     predictbn = form3.form_submit_button("Predict")
-    if predictbn:                    
-        form3.text('User selected initial payment = ' + str(initial_payment))
+    if predictbn:
+        user_inputs = st.session_state['user_inputs']
+        form3.text('User Inputs (not scaled): ' + user_inputs)
 
     submit3 = form3.form_submit_button("Reset")
     if submit3:
