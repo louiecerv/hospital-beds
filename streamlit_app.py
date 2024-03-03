@@ -71,7 +71,7 @@ def display_form1():
     similar, or some other stopping criteria is met."""
     form1.write(text)
 
-    form1.wwrite('Loan Repayment Dataset')
+    form1.write('Loan Repayment Dataset')
     text = """This dataset contains information about debtors and their loan repayment 
     behavior. It could be used to train a decision tree classification model to 
     predict whether a future borrower is likely to repay a loan."""
