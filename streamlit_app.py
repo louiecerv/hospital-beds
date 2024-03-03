@@ -171,7 +171,7 @@ def display_form3():
 
     predictbn = form3.form_submit_button("Predict")
     if predictbn:
-        user_inputs = st.session_state['user_inputs']
+        user_inputs = np.array(st.session_state['user_inputs'])
         form3.write(user_inputs)
 
     submit3 = form3.form_submit_button("Reset")
