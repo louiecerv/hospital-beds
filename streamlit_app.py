@@ -134,6 +134,9 @@ def display_form2():
     # Show the plot
     form2.pyplot(fig)
 
+    form2.write("""\n\nFigure 2. The data shows that the group that paid
+                and those that did not pay is almost linearly separable.""")
+
     # Create and train the Decision Tree Classifier   
     clf = DecisionTreeClassifier(random_state=100, max_depth=3, min_samples_leaf=5)
     clf.fit(X_train_scaled, y_train)
