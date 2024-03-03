@@ -184,7 +184,7 @@ def display_form3():
 def update_values():
     """Get the updated values from the sliders."""
     initial_payment = st.session_state['initial_payment']
-    last_payment = st.session_state['last_payment ']
+    last_payment = st.session_state['last_payment']
     credit_score = st.session_state['credit_score']
     house_number = st.session_state['house_number']
 
