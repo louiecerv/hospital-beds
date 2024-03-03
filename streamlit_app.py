@@ -114,7 +114,7 @@ def display_form3():
         label="Last Payment:",
         min_value=10000,
         max_value=15000,
-        value=5000,  # Initial value
+        value=12000,  # Initial value
     )
 
     credit_score = form3.slider(
@@ -128,7 +128,7 @@ def display_form3():
         label="House Number:",
         min_value=3000,
         max_value=5000,
-        value=3000,  # Initial value
+        value=4000,  # Initial value
     )
 
     predictbn = form3.form_submit_button("Predict")
