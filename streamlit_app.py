@@ -169,8 +169,6 @@ def display_form3():
         key="house_number"
     )
 
-    form3.slider('house_number').value = 4000
-
     predictbn = form3.form_submit_button("Predict")
     if predictbn:
         user_inputs = st.session_state['user_inputs']
