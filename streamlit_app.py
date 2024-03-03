@@ -103,33 +103,49 @@ def display_form3():
     form3.subheader('Prediction')
     form3.write('The trained model will predict if a debtor will repay the loan or not')
 
+    #initialize the slider variables
+    if "initial_payment" not in st.session_state:        
+        st.session_state['initial_payment'] = 200
+    if "last_payment" not in st.session_state:
+        st.session_state['last_payment'] = 12000
+    if "credit_score" not in st.session_state:
+        st.session_state['credit_score'] = 500
+    if "house_number" not in st.session_state:
+        st.session_state['house_number'] = 4000
+
     initial_payment = form3.slider(
         label="Initial Payment:",
         min_value=100,
         max_value=500,
-        value=200,  # Initial value
+        on_change=update_values(),
+        key="initial_payment"
     )
 
     last_payment = form3.slider(
         label="Last Payment:",
         min_value=10000,
         max_value=15000,
-        value=12000,  # Initial value
+        on_change=update_values(),
+        key="last_payment"
     )
 
     credit_score = form3.slider(
         label="Credit Score:",
         min_value=100,
         max_value=1000,
-        value=500,  # Initial value
+        on_change=update_values(),
+        key="credit_score"
     )
 
     house_number = form3.slider(
         label="House Number:",
         min_value=3000,
         max_value=5000,
-        value=4000,  # Initial value
+        on_change=update_values(),
+        key="house_number"
     )
+
+    form3.slider('house_number').value = 4000
 
     predictbn = form3.form_submit_button("Predict")
     if predictbn:                    
@@ -139,6 +155,13 @@ def display_form3():
     if submit3:
         st.session_state.reset_app = True
         st.session_state.clear()
+
+def update_values():
+    """Get the updated values from the sliders."""
+    initial_payment = st.session_state['initial_payment']
+    last_payment = st.session_state['last_payment ']
+    credit_score = st.session_state['credit_score']
+    house_number = st.session_state['house_number']
 
 if __name__ == "__main__":
     app()
