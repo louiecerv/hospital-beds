@@ -172,7 +172,7 @@ def display_form3():
     predictbn = form3.form_submit_button("Predict")
     if predictbn:
         user_inputs = st.session_state['user_inputs']
-        form3.write('User Inputs (not scaled): ' + user_inputs)
+        form3.write('User Inputs (not scaled): ' , user_inputs)
 
     submit3 = form3.form_submit_button("Reset")
     if submit3:
