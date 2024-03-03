@@ -23,6 +23,16 @@ def app():
     if "clf" not in st.session_state:
         st.session_state["clf"] = []
 
+    #initialize the slider variables
+    if "initial_payment" not in st.session_state:        
+        st.session_state['initial_payment'] = 200
+    if "last_payment" not in st.session_state:
+        st.session_state['last_payment'] = 12000
+    if "credit_score" not in st.session_state:
+        st.session_state['credit_score'] = 500
+    if "house_number" not in st.session_state:
+        st.session_state['house_number'] = 4000
+
     # Use session state to track the current form
     if "current_form" not in st.session_state:
         st.session_state["current_form"] = 1    
@@ -126,16 +136,6 @@ def display_form3():
     form3 = st.form("prediction")
     form3.subheader('Prediction')
     form3.write('The trained model will predict if a debtor will repay the loan or not')
-
-    #initialize the slider variables
-    if "initial_payment" not in st.session_state:        
-        st.session_state['initial_payment'] = 200
-    if "last_payment" not in st.session_state:
-        st.session_state['last_payment'] = 12000
-    if "credit_score" not in st.session_state:
-        st.session_state['credit_score'] = 500
-    if "house_number" not in st.session_state:
-        st.session_state['house_number'] = 4000
 
     initial_payment = form3.slider(
         label="Initial Payment:",
