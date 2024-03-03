@@ -101,18 +101,39 @@ def display_form3():
     st.session_state["current_form"] = 3
     form3 = st.form("prediction")
     form3.subheader('Prediction')
-    form3.text('replace with the result of the prediction model.')
+    form3.write('The trained model will predict if a debtor will repay the loan or not')
 
-    n_clusters = form3.slider(
-        label="Number of Clusters:",
-        min_value=2,
-        max_value=6,
-        value=2,  # Initial value
+    initial_payment = form3.slider(
+        label="Initial Payment:",
+        min_value=100,
+        max_value=500,
+        value=200,  # Initial value
+    )
+
+    last_payment = form3.slider(
+        label="Last Payment:",
+        min_value=10000,
+        max_value=15000,
+        value=5000,  # Initial value
+    )
+
+    credit_score = form3.slider(
+        label="Credit Score:",
+        min_value=100,
+        max_value=1000,
+        value=500,  # Initial value
+    )
+
+    house_number = form3.slider(
+        label="House Number:",
+        min_value=3000,
+        max_value=5000,
+        value=3000,  # Initial value
     )
 
     predictbn = form3.form_submit_button("Predict")
     if predictbn:                    
-        form3.text('User selected nclusters = ' + str(n_clusters))
+        form3.text('User selected initial payment = ' + str(initial_payment))
 
     submit3 = form3.form_submit_button("Reset")
     if submit3:
