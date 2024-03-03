@@ -116,16 +116,16 @@ def display_form2():
 
     # Create a scatter plot with color based on species
     sns.scatterplot(
-        x="initial payment",
-        y="credit score",
+        x="credit score",
+        y="last payment",
         hue="result",
         palette="bright",
         data=df,
         ax=ax,
     )
     # Add labels and title
-    ax.set_xlabel("Sepal Width (cm)")
-    ax.set_ylabel("Sepal Length (cm)")
+    ax.set_xlabel("Credit Score")
+    ax.set_ylabel("Last Payment")
     ax.set_title("Debtors Payment Status")
 
     # Add legend
