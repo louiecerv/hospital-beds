@@ -62,10 +62,10 @@ def display_form1():
     text = """The decision tree algorithm is a supervised learning technique 
     used for both classification and regression tasks. It works by building 
     a tree-like model with:
-    Nodes: These represent features (or questions) from your data.
-    Branches: These represent the possible answers to those features (like "yes" or "no").
-    Leaves: These represent the final predictions (like "spam" or "not spam").
-    The algorithm builds the tree by recursively splitting the data based on 
+    \nNodes: These represent features (or questions) from your data.
+    \nBranches: These represent the possible answers to those features (like "yes" or "no").
+    \nLeaves: These represent the final predictions (like "spam" or "not spam").
+    \nThe algorithm builds the tree by recursively splitting the data based on 
     the feature that best separates the data points into distinct groups. 
     This process continues until the data points at each leaf are sufficiently 
     similar, or some other stopping criteria is met."""
