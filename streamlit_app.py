@@ -13,6 +13,9 @@ def app():
     if "reset_app" not in st.session_state:
         st.session_state.reset_app = False
 
+    if "user_inputs" not in st.session_state:
+        st.session_state['user_inputs'] = []]
+
     # Use session state to track the current form
     if "current_form" not in st.session_state:
         st.session_state["current_form"] = 1    
@@ -162,6 +165,9 @@ def update_values():
     last_payment = st.session_state['last_payment ']
     credit_score = st.session_state['credit_score']
     house_number = st.session_state['house_number']
+
+    st.session_state['user_inputs'] = [[initial_payment, 
+        last_payment, credit_score, house_number]]
 
 if __name__ == "__main__":
     app()
