@@ -180,6 +180,9 @@ def display_form3():
         form3.write(user_inputs)
         form3.write(test_data_scaled)
 
+        predicted =  st.session_state["clf"].predict(test_data_scaled)
+        form3.subheader("Predicted result: " + predicted)
+
     submit3 = form3.form_submit_button("Reset")
     if submit3:
         st.session_state.reset_app = True
