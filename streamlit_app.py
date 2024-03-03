@@ -167,7 +167,8 @@ def display_form3():
         min_value=100,
         max_value=500,
         on_change=update_values(),
-        key="initial_payment"
+        key="initial_payment",
+        value = 300
     )
 
     last_payment = form3.slider(
@@ -195,7 +196,7 @@ def display_form3():
     )
 
     update_values()
-    
+
     predictbn = form3.form_submit_button("Predict")
     if predictbn:
         user_inputs = np.array(st.session_state['user_inputs'])
