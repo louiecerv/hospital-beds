@@ -4,10 +4,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns; sns.set()
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
-from sklearn import svm
-from sklearn.datasets import make_blobs
-from sklearn.pipeline import make_pipeline
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 
@@ -65,13 +63,24 @@ def display_form2():
 
     form2.write('The dataset descriptive stats')
     form2.write(df.describe().T)
-    
+
     X = df.values[:,0:-1]
     y = df.values[:,-1]    
     
+    X_train, X_test, y_train, y_test = train_test_split( X, y, test_size = 0.2, random_state = 42)
 
+    clf = DecisionTreeClassifier(random_state=100, max_depth=3, min_samples_leaf=5)
+    clf.fit(X_train, y_train)
 
+    y_test_pred = clf.predict(X_test)
 
+    st.subheader('Confusion Matrix')
+    cm = confusion_matrix(y_test, y_test_pred)
+    st.text(cm)
+
+    st.subheader('Performance Metrics')
+    st.text(classification_report(y_test, y_test_pred))
+        
     submit2 = form2.form_submit_button("Train")
 
     if submit2:        
