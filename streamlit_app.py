@@ -75,7 +75,7 @@ def display_form2():
     # Add the title
     ax.set_title('Distribution of Paid/Not Paid')
     # Display the plot using Streamlit
-    st.pyplot(fig)
+    form2.pyplot(fig)
 
 
     X_train, X_test, y_train, y_test = train_test_split( X, y, test_size = 0.2, random_state = 42)
