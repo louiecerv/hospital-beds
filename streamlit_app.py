@@ -194,6 +194,8 @@ def display_form3():
         key="house_number"
     )
 
+    update_values()
+    
     predictbn = form3.form_submit_button("Predict")
     if predictbn:
         user_inputs = np.array(st.session_state['user_inputs'])
