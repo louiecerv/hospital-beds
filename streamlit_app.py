@@ -8,13 +8,17 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
+from sklearn.preprocessing import StandardScaler
 
 def app():
     if "reset_app" not in st.session_state:
         st.session_state.reset_app = False
 
     if "user_inputs" not in st.session_state:
-        st.session_state['user_inputs'] = []]
+        st.session_state['user_inputs'] = []
+
+    if "scaler" not in st.session_state:
+        st.session_state["scaler"] = StandardScaler()
 
     # Use session state to track the current form
     if "current_form" not in st.session_state:
@@ -67,8 +71,16 @@ def display_form2():
     form2.write('The dataset descriptive stats')
     form2.write(df.describe().T)
 
-    X = df.values[:,0:-1]
-    y = df.values[:,-1]    
+    # Separate features and target variable
+    X = df.drop('result', axis=1)  # Target variable column name
+    y = df['result']
+    
+    # Standardize features using StandardScaler (recommended)
+    scaler = st.session_state["scaler"] 
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+
+    st.session_state["scaler"] = scaler
     
     fig, ax = plt.subplots(figsize=(6, 2))
 
