@@ -51,8 +51,8 @@ def display_form1():
 
     # Display the DataFrame with formatting
     form1.title("Loan Repayment Predictor based on the Decision Tree Algorithm")
-
-   CCS 229 - Intelligent Systems
+    text = """(c) 2024 Louie F. Cervantes, M.Eng. [Information Engineering] 
+    CCS 229 - Intelligent Systems
     Computer Science Department
     College of Information and Communications Technology
     West Visayas State University"""
