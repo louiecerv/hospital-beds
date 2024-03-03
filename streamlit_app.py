@@ -181,7 +181,8 @@ def display_form3():
         form3.write(test_data_scaled)
 
         predicted =  st.session_state["clf"].predict(test_data_scaled)
-        form3.subheader("Predicted result: " + predicted)
+        result = 'The debtor will pay? The model predicts - ' + predicted
+        form3.subheader(result)
 
     submit3 = form3.form_submit_button("Reset")
     if submit3:
