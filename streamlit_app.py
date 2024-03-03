@@ -60,11 +60,16 @@ def display_form2():
     df = pd.read_csv(dbfile, header=0)
 
     #display the data set
+    form2.write('Browse the dataset')
     form2.write(df)
 
+    form2.write('The dataset descriptive stats')
+    form2.write(df.describe().T)
+    
     X = df.values[:,0:-1]
     y = df.values[:,-1]    
     
+
 
 
     submit2 = form2.form_submit_button("Train")
