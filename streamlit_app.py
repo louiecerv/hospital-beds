@@ -67,7 +67,7 @@ def display_form2():
     X = df.values[:,0:-1]
     y = df.values[:,-1]    
     
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(6, 2))
 
     # Create the horizontal barplot
     sns.countplot(y='result', data=df, hue='result', palette='bright', ax=ax)
