@@ -57,6 +57,15 @@ def display_form2():
     form2 = st.form("training")
     form2.subheader('Classifier Training')        
 
+    #load the data and the labels
+    dbfile = 'encoded-ebanking.csv'
+    df = pd.read_csv(dbfile, header=0)
+
+    #display the data set
+    form2.write(df)
+    
+    X = df.values[:,0:-1]
+    y = df.values[:,-1]    
     
 
 
