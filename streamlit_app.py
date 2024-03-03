@@ -67,6 +67,17 @@ def display_form2():
     X = df.values[:,0:-1]
     y = df.values[:,-1]    
     
+    fig, ax = plt.subplots()
+
+    # Create the horizontal barplot
+    sns.countplot(y='result', data=df, hue='result', palette='bright', ax=ax)
+
+    # Add the title
+    ax.set_title('Distribution of Paid/Not Paid')
+    # Display the plot using Streamlit
+    st.pyplot(fig)
+
+
     X_train, X_test, y_train, y_test = train_test_split( X, y, test_size = 0.2, random_state = 42)
 
     clf = DecisionTreeClassifier(random_state=100, max_depth=3, min_samples_leaf=5)
