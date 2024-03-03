@@ -176,7 +176,8 @@ def display_form3():
         min_value=10000,
         max_value=15000,
         on_change=update_values(),
-        key="last_payment"
+        key="last_payment",
+        value = 12000
     )
 
     credit_score = form3.slider(
@@ -184,7 +185,8 @@ def display_form3():
         min_value=100,
         max_value=1000,
         on_change=update_values(),
-        key="credit_score"
+        key="credit_score",
+        value = 500
     )
 
     house_number = form3.slider(
@@ -192,7 +194,8 @@ def display_form3():
         min_value=3000,
         max_value=5000,
         on_change=update_values(),
-        key="house_number"
+        key="house_number",
+        value = 3700
     )
 
     update_values()
