@@ -163,8 +163,8 @@ def display_form2():
     # Calculate Mean Squared Error (MSE)
     mse = mean_squared_error(y_test, y_test_pred)
 
-    form2.write("R-squared:", r2)
-    form2.write("Mean Squared Error:", mse)
+    form2.write("R-squared:" + str(r2))
+    form2.write("Mean Squared Error:" + str(mse))
 
         
     submit2 = form2.form_submit_button("Predict")
