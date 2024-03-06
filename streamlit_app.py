@@ -147,8 +147,6 @@ def display_form2():
 
     #save the scaler object for later use in prediction
     st.session_state["scaler"] = scaler
-    
-
 
     # Create and train the Decision Tree Classifier   
     clf = st.session_state.clf
@@ -158,6 +156,7 @@ def display_form2():
     # Make predictions on the test set
     y_test_pred = clf.predict(X_test_scaled)
 
+    form2.subheader('Regressor Performance')
     # Calculate R-squared
     r2 = r2_score(y_test, y_test_pred)
 
