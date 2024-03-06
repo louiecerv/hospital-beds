@@ -265,7 +265,6 @@ def display_form3():
         value = 50000
     )    
 
-
     projected_infected = form3.slider(
         label="Projected Infected Individuals:",
         min_value=40000,
@@ -332,10 +331,18 @@ def display_form3():
 
 def update_values():
     """Get the updated values from the sliders."""
-    initial_payment = st.session_state['initial_payment']
-    last_payment = st.session_state['last_payment']
-    credit_score = st.session_state['credit_score']
-    house_number = st.session_state['house_number']
+    total_beds = st.session_state.total_bed.stotal_beds
+    total_icu_beds = st.session_state.total_icu_beds
+    available_beds = st.session_state.available_beds
+    potentially_available = st.session_state.erpotentially_available
+    available_icu_beds = st.session_state.available_icu_beds
+    potentially_available_icu_beds = st.session_state.potentially_available_icu_beds
+    adult_population = st.session_state.adult_population
+    population_65plus = st.session_state.population_65plus
+    projected_infected = st.session_state.projected_infected
+    projected_infected = st.session_state.projected_infected
+    projected_hospitalized = st.session_state.projected_hospitalized
+    projected_needing_icu = st.session_state.projected_needing_icu
 
     st.session_state['user_inputs'] = [[initial_payment, 
         last_payment, credit_score, house_number]]
