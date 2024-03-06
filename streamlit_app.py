@@ -172,7 +172,7 @@ def display_form2():
         display_form3()
 
 """
-Total ICU Beds
+
 Available Hospital Beds
 Potentially Available Hospital Beds*
 Available ICU Beds
@@ -194,39 +194,58 @@ def display_form3():
 
     total_beds = form3.slider(
         label="Total Hospital Beds:",
-        min_value=100,
-        max_value=500,
-        #on_change=update_values(),
+        min_value=200,
+        max_value=20000,
+        on_change=update_values(),
         key="total_beds",
+        value = 1000
+    )
+    total_icu_beds = form3.slider(
+        label="Total ICU Beds:",
+        min_value=18,
+        max_value=2500,
+        on_change=update_values(),
+        key="total_icu_beds",
+        value = 1500
+    )
+
+    available_beds = form3.slider(
+        label="Available Hospital Beds:",
+        min_value=100,
+        max_value=6500,
+        on_change=update_values(),
+        key="available_beds",
         value = 300
     )
 
-    last_payment = form3.slider(
-        label="Last Payment:",
-        min_value=10000,
-        max_value=15000,
+    potentially_available = form3.slider(
+        label="Potentially Available Beds:",
+        min_value=160,
+        max_value=13000,
         on_change=update_values(),
-        key="last_payment",
-        value = 12000
+        key="potentially_available",
+        value = 5000
     )
 
-    credit_score = form3.slider(
-        label="Credit Score:",
-        min_value=100,
+    available_icu_beds = form3.slider(
+        label="Available ICU Beds:",
+        min_value=5,
         max_value=1000,
         on_change=update_values(),
-        key="credit_score",
-        value = 500
+        key="available_icu_beds",
+        value = 600
     )
 
-    house_number = form3.slider(
-        label="House Number:",
-        min_value=3000,
-        max_value=5000,
+    potentially_available_icu_beds = form3.slider(
+        label="Available ICU Beds:",
+        min_value=5,
+        max_value=1700,
         on_change=update_values(),
-        key="house_number",
-        value = 3700
+        key="potentially_available_icu_beds",
+        value = 600
     )
+
+
 
     update_values()
 
