@@ -5,6 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns; sns.set()
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
@@ -94,6 +95,21 @@ def display_form1():
     The model trained on this data can be used to predict the risk of 
     loan default for future borrowers."""
     form1.write(text)
+
+    # Create the selection of classifier
+    
+    clf = DecisionTreeClassifier(random_state=100, max_depth=3, min_samples_leaf=5)
+    options = ['Decision Tree', 'Random Forest Classifier', 'Extreme Random Forest Classifier']
+    selected_option = form1.selectbox('Select the classifier', options)
+    if selected_option =='Random Forest Classifier':
+        clf = RandomForestClassifier(n_jobs=2, random_state=0)
+    elif selected_option=='Extreme Random Forest Classifier':        
+        clf = ExtraTreesClassifier(n_estimators=100, max_depth=4, random_state=0)        
+    else:
+        clf = DecisionTreeClassifier(random_state=100, max_depth=3, min_samples_leaf=5)
+
+    #save the clf to session state
+    st.session_state['clf'] = clf
                                                                               
     submit1 = form1.form_submit_button("Start")
 
@@ -172,7 +188,7 @@ def display_form2():
                 and not paid is almost linearly separable based on their last payment.""")
 
     # Create and train the Decision Tree Classifier   
-    clf = DecisionTreeClassifier(random_state=100, max_depth=3, min_samples_leaf=5)
+    clf = st.session_state.clf
     clf.fit(X_train_scaled, y_train)
     st.session_state["clf"] = clf
 
