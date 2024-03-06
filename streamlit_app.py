@@ -119,7 +119,7 @@ def display_form1():
 def display_form2():
     st.session_state["current_form"] = 2
     form2 = st.form("training")
-    form2.subheader('Classifier Training')        
+    form2.subheader('Regressor Training')        
 
     #load the data and the labels
     dbfile = 'hospitalbeds.csv'
