@@ -1,4 +1,4 @@
-import streamlit as st
+ import streamlit as st
 import altair as alt
 import numpy as np
 import pandas as pd
@@ -51,7 +51,7 @@ def display_form1():
     form1 = st.form("intro")
 
     # Display the DataFrame with formatting
-    form1.title("Loan Repayment Predictor based on the Decision Tree Algorithm")
+    form1.title("Predicting Hospital Bed Needs with Decision Trees and Random Forests")
     text = """(c) 2024 Louie F. Cervantes, M.Eng. [Information Engineering] 
     CCS 229 - Intelligent Systems
     Computer Science Department
@@ -59,66 +59,41 @@ def display_form1():
     West Visayas State University"""
     form1.text(text)
                 
-    form1.subheader('Binary Classification: Loan Repayment Prediction')
-    form1.write('Task:')
-    text = """Develop a model to predict whether a loan applicant will repay 
-    their loan in full (positive class) or default (negative class) based 
-    on historical data."""
-    form1.write(text)
-    form1.write('Algorithms')
-
-    text = """Decision Tree: This algorithm creates a tree-like structure where 
-    each node represents a decision point based on a specific feature 
-    (e.g., initial payment, credit score). Data is split at each node based on a
-    split point, leading to leaves representing the predicted class (repay 
-    or default) for specific data points.
-    In the loan repayment context, the decision tree might split borrowers
-    based on initial payment at the root node, then further split by credit score 
-    at subsequent nodes until reaching a leaf node (repay or default) for 
-    each borrower type.
-    \nRandom Forest: This ensemble method builds on decision trees. It trains 
-    multiple decision trees with some key differences:
-    \nBootstrapping: Each tree uses a random sample (with replacement) of the 
-    original data, increasing diversity among trees.
-    \nFeature Randomness: At each split point, only a random subset of features 
-    is considered, further diversifying tree predictions. For loan prediction, 
-    the random forest would train multiple decision trees, each analyzing 
-    different subsets of borrowers and features, ultimately aggregating their 
-    predictions (e.g., majority vote) for a final classification.
-    \nExtra Trees Forest: Similar to the random forest, it builds an ensemble of 
-    decision trees. However, two key differences exist: No Bootstrapping: All data 
-    points are used to train each tree, potentially leading to less diverse predictions 
-    than the random forest. Random Split Points: At each split point, a random split 
-    point is chosen from among all possible values of the chosen feature, further 
-    differentiating it from the random forest. The extra trees forest would also 
-    train multiple decision trees, but without the randomness in feature selection 
-    and data sampling present in the random forest. It would then combine the predictions 
-    from these trees for the final classification."""
+    form1.subheader('Regression Task: Predicting Hospital Bed Needs with Decision Trees and Random Forests')
+    form1.write('Data Source:')
+    text = """This data app explores the hospital bed capacity in 306 US hospital referral regions 
+    under various COVID-19 infection scenarios. """
     form1.write(text)
 
-    form1.write('Loan Repayment Dataset')
-    text = """This dataset contains information about debtors and their loan repayment 
-    behavior. It could be used to train a decision tree classification model to 
-    predict whether a future borrower is likely to repay a loan."""
+    text = """The data originates from the Harvard Global Data Institute and represents various 
+    models simulating a 40 percent adult population infection rate with COVID-19. Hospital bed 
+    capacity information comes from the American Hospital Association and the American 
+    Hospital Directory."""
     form1.write(text)
-    form1.write('Features:')
-    text = """Initial Payment: Amount of money paid upfront when the loan was taken. (Numerical)
-    Last Payment: Amount of the last payment made by the borrower. (Numerical)
-    Credit Score: Numerical score indicating the borrower's creditworthiness. (Numerical)
-    House Number: Unique identifier for the borrower's residence. (Categorical)"""
-    form1.write(text)
-    form1.write('Label')
-    text = """Result (Yes/No): Indicates whether the borrower fully repaid the loan 
-    ("Yes") or not ("No"). (Categorical)"""
-    form1.write(text)
-    form1.write('Potential Uses:')
-    text = """This dataset could be used by banks or lending institutions to assess 
-    the creditworthiness of potential borrowers and make informed lending decisions.
-    It can be used to identify patterns in loan repayment behavior, such as the 
-    relationship between credit score and repayment likelihood.
-    The model trained on this data can be used to predict the risk of 
-    loan default for future borrowers."""
-    form1.write(text)
+    
+    form1.write('App Functionality:')
+
+    text = """Data Exploration:
+    * View information about different hospital referral regions.
+    * Analyze statistics on current bed capacity across regions.
+        \nScenario Selection: Choose from various COVID-19 infection scenario models 
+        developed by Harvard researchers.
+        \nPrediction Models:
+        \nDecision Tree Regression: This model visually represents the decision-making process 
+        for predicting bed needs based on different factors. Users can interactively explore the 
+        tree structure and understand the reasoning behind the predictions.
+        \nRandom Forest Regression: This model combines multiple decision trees for improved 
+        prediction accuracy and robustness. 
+        \nComparison: Compare the predictions from both the decision tree and random forest 
+        models for each region and scenario. Identify regions with potential bed shortages
+        based on the model outputs.
+        \nPotential Use Cases:
+    \nPublic health officials:** Allocate resources and plan for surge capacity based on predicted bed needs.
+    \nHospital administrators:** Prepare for potential bed shortages and make informed staffing decisions.
+    \nResearchers:** Gain insights into the factors influencing hospital bed demand during pandemics.
+    \nThis data app leverages the power of decision trees and random forests to provide valuable 
+    insights for various stakeholders involved in managing hospital bed capacity during
+    public health emergencies."""
 
     # Create the selection of classifier
     
@@ -148,7 +123,7 @@ def display_form2():
     form2.subheader('Classifier Training')        
 
     #load the data and the labels
-    dbfile = 'loan-repayment.csv'
+    dbfile = 'hopitalbeds.csv'
     df = pd.read_csv(dbfile, header=0)
 
     #display the data set
@@ -173,43 +148,7 @@ def display_form2():
     #save the scaler object for later use in prediction
     st.session_state["scaler"] = scaler
     
-    fig, ax = plt.subplots(figsize=(6, 2))
 
-    # Create the horizontal barplot
-    sns.countplot(y='result', data=df, hue='result', palette='bright', ax=ax)
-
-    # Add the title
-    ax.set_title('Distribution of Paid/Not Paid')
-    # Display the plot using Streamlit
-    form2.pyplot(fig)
-    form2.write("""Figure 1. The data shows that the debtors are almost equal between 
-    those that paid their loans (yes) and those that did not (no).""")
-
-    # Create a figure and an axis
-    fig, ax = plt.subplots(figsize=(6, 6))
-
-    # Create a scatter plot with color based on species
-    sns.scatterplot(
-        x="credit score",
-        y="last payment",
-        hue="result",
-        palette="bright",
-        data=df,
-        ax=ax,
-    )
-    # Add labels and title
-    ax.set_xlabel("Credit Score")
-    ax.set_ylabel("Last Payment")
-    ax.set_title("Debtors Payment Status")
-
-    # Add legend
-    plt.legend(title="Paid the Loan")
-
-    # Show the plot
-    form2.pyplot(fig)
-
-    form2.write("""\n\nFigure 2. The data shows that the groups paid
-                and not paid is almost linearly separable based on their last payment.""")
 
     # Create and train the Decision Tree Classifier   
     clf = st.session_state.clf
