@@ -134,8 +134,8 @@ def display_form2():
     form2.write(df.describe().T)
 
     # Separate features and target variable
-    X = df.drop('result', axis=1)  # Target variable column name
-    y = df['result']
+    X = df.drop('Hospital Beds Needed, Six Months', axis=1)  # Target variable column name
+    y = df['Hospital Beds Needed, Six Months']
     
     # Split data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
