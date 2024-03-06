@@ -196,19 +196,7 @@ def display_form2():
     if submit2:        
         display_form3()
 
-"""
 
-Available Hospital Beds
-Potentially Available Hospital Beds*
-Available ICU Beds
-Potentially Available ICU Beds*
-Adult Population
-Population 65+
-Projected Infected Individuals
-Projected Hospitalized Individuals
-Projected Individuals Needing ICU Care
-
-"""
 
 def display_form3():
     st.session_state["current_form"] = 3
@@ -325,7 +313,9 @@ def display_form3():
     predictbn = form3.form_submit_button("Predict")
     if predictbn:
         user_inputs = np.array(st.session_state['user_inputs'])
+        form3.write(user_inputs)
 
+    """
         scaler = st.session_state["scaler"]
         test_data_scaled =scaler.transform(user_inputs)
         test_data_scaled = np.array(test_data_scaled)
@@ -337,7 +327,7 @@ def display_form3():
         predicted =  st.session_state["clf"].predict(test_data_scaled)
         result = 'How many hospital beds are needed? The model predicts: ' + predicted[0]
         form3.subheader(result)
-
+    """
     submit3 = form3.form_submit_button("Reset")
     if submit3:
         st.session_state.reset_app = True
