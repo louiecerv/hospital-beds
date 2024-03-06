@@ -171,18 +171,33 @@ def display_form2():
     if submit2:        
         display_form3()
 
+"""
+Total ICU Beds
+Available Hospital Beds
+Potentially Available Hospital Beds*
+Available ICU Beds
+Potentially Available ICU Beds*
+Adult Population
+Population 65+
+Projected Infected Individuals
+Projected Hospitalized Individuals
+Projected Individuals Needing ICU Care
+
+"""
+
 def display_form3():
     st.session_state["current_form"] = 3
     form3 = st.form("prediction")
     form3.subheader('Prediction')
-    form3.write('The trained model will predict if a debtor will repay the loan or not')
+    form3.write("""To test this trained model, input the data below. The trained model 
+        will then predict the projected hospital beds required for the infection scenario.""")
 
-    initial_payment = form3.slider(
-        label="Initial Payment:",
+    total_beds = form3.slider(
+        label="Total Hospital Beds:",
         min_value=100,
         max_value=500,
-        on_change=update_values(),
-        key="initial_payment",
+        #on_change=update_values(),
+        key="total_beds",
         value = 300
     )
 
