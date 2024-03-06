@@ -237,7 +237,7 @@ def display_form3():
     )
 
     potentially_available_icu_beds = form3.slider(
-        label="Available ICU Beds:",
+        label="Potentially Available ICU Beds:",
         min_value=5,
         max_value=1700,
         on_change=update_values(),
@@ -245,7 +245,66 @@ def display_form3():
         value = 600
     )
 
+    adult_population = form3.slider(
+        label="Adult Population:",
+        min_value=10000,
+        max_value=7900000,
+        step=100,
+        on_change=update_values(),
+        key="adult_population",
+        value = 50000
+    )
 
+    population_65plus = form3.slider(
+        label="Population 65+ :",
+        min_value=20000,
+        max_value=1268000,
+        step=100,
+        on_change=update_values(),
+        key="population_65plus",
+        value = 50000
+    )    
+
+
+    projected_infected = form3.slider(
+        label="Projected Infected Individuals:",
+        min_value=40000,
+        max_value=3149000,
+        step=100,
+        on_change=update_values(),
+        key="projected_infected",
+        value = 50000
+    )   
+
+    projected_infected = form3.slider(
+        label="Projected Infected Individuals:",
+        min_value=40000,
+        max_value=3149000,
+        step=100,
+        on_change=update_values(),
+        key="projected_infected",
+        value = 50000
+    )   
+
+    projected_hospitalized = form3.slider(
+        label="Projected Infected Individuals:",
+        min_value=8600,
+        max_value=650000,
+        step=100,
+        on_change=update_values(),
+        key="projected_hospitalized",
+        value = 150000
+    )   
+
+    projected_needing_icu = form3.slider(
+        label="Projected Individuals Needing ICU:",
+        min_value=1930,
+        max_value=136000,
+        step=10,
+        on_change=update_values(),
+        key="projected_needing_icu",
+        value = 10000
+    )       
 
     update_values()
 
