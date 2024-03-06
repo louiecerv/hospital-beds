@@ -69,7 +69,7 @@ def display_form1():
 
     text = """Decision Tree: This algorithm creates a tree-like structure where 
     each node represents a decision point based on a specific feature 
-    (e.g., income, credit score). Data is split at each node based on a
+    (e.g., initial payment, credit score). Data is split at each node based on a
     split point, leading to leaves representing the predicted class (repay 
     or default) for specific data points.
     In the loan repayment context, the decision tree might split borrowers
