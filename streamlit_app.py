@@ -335,10 +335,10 @@ def display_form3():
 
 def update_values():
     """Get the updated values from the sliders."""
-    total_beds = st.session_state.total_bed.stotal_beds
+    total_beds = st.session_state.total_beds
     total_icu_beds = st.session_state.total_icu_beds
     available_beds = st.session_state.available_beds
-    potentially_available = st.session_state.rpotentially_available
+    potentially_available = st.session_state.potentially_available
     available_icu_beds = st.session_state.available_icu_beds
     potentially_available_icu_beds = st.session_state.potentially_available_icu_beds
     adult_population = st.session_state.adult_population
