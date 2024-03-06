@@ -7,8 +7,7 @@ import seaborn as sns; sns.set()
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import classification_report
+from sklearn.metrics import r2_score, mean_squared_error
 from sklearn.preprocessing import StandardScaler
 
 def app():
