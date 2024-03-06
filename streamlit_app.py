@@ -312,7 +312,6 @@ def display_form3():
     predictbn = form3.form_submit_button("Predict")
     if predictbn:
         user_inputs = np.array(st.session_state['user_inputs'])
-        form3.write(user_inputs)
         scaler = st.session_state["scaler"]
         test_data_scaled =scaler.transform(user_inputs)
         test_data_scaled = np.array(test_data_scaled)
