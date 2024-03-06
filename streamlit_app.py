@@ -123,7 +123,7 @@ def display_form2():
     form2.subheader('Classifier Training')        
 
     #load the data and the labels
-    dbfile = 'hopitalbeds.csv'
+    dbfile = 'hospitalbeds.csv'
     df = pd.read_csv(dbfile, header=0)
 
     #display the data set
