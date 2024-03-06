@@ -25,38 +25,37 @@ def app():
 
     #initialize the slider variables
     if "total_beds" not in st.session_state:
-        st.sesssion_state.total_beds = 0
+        st.session_state.total_beds = 0
                 
     if "total_icu_beds" not in st.session_state:
-        st.sesssion_state.total_icu_beds = 0
+        st.session_state.total_icu_beds = 0
         
     if "available_beds" not in st.session_state:
-        st.sesssion_state.available_beds = 0
+        st.session_state.available_beds = 0
         
     if "potentially_available" not in st.session_state:
-        st.sesssion_state.potentially_available = 0
+        st.session_state.potentially_available = 0
 
     if "available_icu_beds" not in st.session_state:
-        st.sesssion_state.available_icu_beds = 0
+        st.session_state.available_icu_beds = 0
 
     if "potentially_available_icu_beds" not in st.session_state:
-        st.sesssion_state.potentially_available_icu_beds = 0
+        st.session_state.potentially_available_icu_beds = 0
         
     if "adult_population" not in st.session_state:
-        st.sesssion_state.adult_population = 0
+        st.session_state.adult_population = 0
         
     if "population_65plus" not in st.session_state:
-        st.sesssion_state.population_65plus = 0
+        st.session_state.population_65plus = 0
 
     if "projected_infected" not in st.session_state:
-        st.sesssion_state.projected_infected = 0
+        st.session_state.projected_infected = 0
 
     if "projected_hospitalized" not in st.session_state:
-        st.sesssion_state.projected_hospitalized = 0
+        st.session_state.projected_hospitalized = 0
         
     if "projected_needing_icu" not in st.session_state:
-        st.sesssion_state.projected_needing_icu = 0
-
+        st.session_state.projected_needing_icu = 0
 
     # Use session state to track the current form
     if "current_form" not in st.session_state:
