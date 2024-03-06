@@ -82,7 +82,7 @@ def display_form1():
     West Visayas State University"""
     form1.text(text)
                 
-    form1.subheader('Regression Task: Predicting Hospital Bed Needs with Decision Trees and Random Forests')
+    form1.subheader('Regression Task: Predicting Hospital Bed Needs')
     form1.write('Data Source:')
     text = """This data app explores the hospital bed capacity in 306 US hospital referral regions 
     under various COVID-19 infection scenarios. """
