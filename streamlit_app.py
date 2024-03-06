@@ -159,10 +159,10 @@ def display_form2():
     y_test_pred = clf.predict(X_test_scaled)
 
     # Calculate R-squared
-    r2 = r2_score(y_test, y_pred)
+    r2 = r2_score(y_test, y_test_pred)
 
     # Calculate Mean Squared Error (MSE)
-    mse = mean_squared_error(y_test, y_pred)
+    mse = mean_squared_error(y_test, y_test_pred)
 
     form2.write("R-squared:", r2)
     form2.write("Mean Squared Error:", mse)
