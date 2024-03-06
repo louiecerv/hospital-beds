@@ -158,12 +158,15 @@ def display_form2():
     # Make predictions on the test set
     y_test_pred = clf.predict(X_test_scaled)
 
-    form2.subheader('Confusion Matrix')
-    cm = confusion_matrix(y_test, y_test_pred)
-    form2.text(cm)
+    # Calculate R-squared
+    r2 = r2_score(y_test, y_pred)
 
-    form2.subheader('Performance Metrics')
-    form2.text(classification_report(y_test, y_test_pred))
+    # Calculate Mean Squared Error (MSE)
+    mse = mean_squared_error(y_test, y_pred)
+
+    form2.write("R-squared:", r2)
+    form2.write("Mean Squared Error:", mse)
+
         
     submit2 = form2.form_submit_button("Predict")
     if submit2:        
