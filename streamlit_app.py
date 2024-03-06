@@ -87,14 +87,14 @@ def display_form1():
         models for each region and scenario. Identify regions with potential bed shortages
         based on the model outputs.
         \nPotential Use Cases:
-    \nPublic health officials:** Allocate resources and plan for surge capacity based on predicted bed needs.
-    \nHospital administrators:** Prepare for potential bed shortages and make informed staffing decisions.
-    \nResearchers:** Gain insights into the factors influencing hospital bed demand during pandemics.
+    \nPublic health officials:\nAllocate resources and plan for surge capacity based on predicted bed needs.
+    \nHospital administrators:\nPrepare for potential bed shortages and make informed staffing decisions.
+    \nResearchers:\nGain insights into the factors influencing hospital bed demand during pandemics.
     \nThis data app leverages the power of decision trees and random forests to provide valuable 
     insights for various stakeholders involved in managing hospital bed capacity during
     public health emergencies."""
     form1.write(text)
-    
+
     # Create the selection of classifier
     
     clf = DecisionTreeClassifier(random_state=100, max_depth=3, min_samples_leaf=5)
