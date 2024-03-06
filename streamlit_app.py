@@ -93,7 +93,8 @@ def display_form1():
     \nThis data app leverages the power of decision trees and random forests to provide valuable 
     insights for various stakeholders involved in managing hospital bed capacity during
     public health emergencies."""
-
+    form1.write(text)
+    
     # Create the selection of classifier
     
     clf = DecisionTreeClassifier(random_state=100, max_depth=3, min_samples_leaf=5)
