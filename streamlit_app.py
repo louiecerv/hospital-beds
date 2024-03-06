@@ -24,14 +24,39 @@ def app():
         st.session_state["clf"] = []
 
     #initialize the slider variables
-    if "initial_payment" not in st.session_state:        
-        st.session_state['initial_payment'] = 200
-    if "last_payment" not in st.session_state:
-        st.session_state['last_payment'] = 12000
-    if "credit_score" not in st.session_state:
-        st.session_state['credit_score'] = 500
-    if "house_number" not in st.session_state:
-        st.session_state['house_number'] = 4000
+    if "total_beds" not in st.session_state:
+        st.sesssion_state.total_beds = 0
+                
+    if "total_icu_beds" not in st.session_state:
+        st.sesssion_state.total_icu_beds = 0
+        
+    if "available_beds" not in st.session_state:
+        st.sesssion_state.available_beds = 0
+        
+    if "potentially_available" not in st.session_state:
+        st.sesssion_state.potentially_available = 0
+
+    if "available_icu_beds" not in st.session_state:
+        st.sesssion_state.available_icu_beds = 0
+
+    if "potentially_available_icu_beds" not in st.session_state:
+        st.sesssion_state.potentially_available_icu_beds = 0
+        
+    if "adult_population" not in st.session_state:
+        st.sesssion_state.adult_population = 0
+        
+    if "population_65plus" not in st.session_state:
+        st.sesssion_state.population_65plus = 0
+
+    if "projected_infected" not in st.session_state:
+        st.sesssion_state.projected_infected = 0
+
+    if "projected_hospitalized" not in st.session_state:
+        st.sesssion_state.projected_hospitalized = 0
+        
+    if "projected_needing_icu" not in st.session_state:
+        st.sesssion_state.projected_needing_icu = 0
+
 
     # Use session state to track the current form
     if "current_form" not in st.session_state:
@@ -275,16 +300,6 @@ def display_form3():
         value = 50000
     )   
 
-    projected_infected = form3.slider(
-        label="Projected Infected Individuals:",
-        min_value=40000,
-        max_value=3149000,
-        step=100,
-        on_change=update_values(),
-        key="projected_infected",
-        value = 50000
-    )   
-
     projected_hospitalized = form3.slider(
         label="Projected Infected Individuals:",
         min_value=8600,
@@ -334,18 +349,27 @@ def update_values():
     total_beds = st.session_state.total_bed.stotal_beds
     total_icu_beds = st.session_state.total_icu_beds
     available_beds = st.session_state.available_beds
-    potentially_available = st.session_state.erpotentially_available
+    potentially_available = st.session_state.rpotentially_available
     available_icu_beds = st.session_state.available_icu_beds
     potentially_available_icu_beds = st.session_state.potentially_available_icu_beds
     adult_population = st.session_state.adult_population
     population_65plus = st.session_state.population_65plus
     projected_infected = st.session_state.projected_infected
-    projected_infected = st.session_state.projected_infected
     projected_hospitalized = st.session_state.projected_hospitalized
     projected_needing_icu = st.session_state.projected_needing_icu
 
-    st.session_state['user_inputs'] = [[initial_payment, 
-        last_payment, credit_score, house_number]]
+    st.session_state['user_inputs'] = [[
+        total_beds,
+        total_icu_beds,
+        available_beds,
+        potentially_available,
+        available_icu_beds,
+        potentially_available_icu_beds,
+        adult_population,
+        population_65plus,
+        projected_infected,
+        projected_hospitalized,
+        projected_needing_icu]]
 
 if __name__ == "__main__":
     app()
