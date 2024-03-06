@@ -59,17 +59,41 @@ def display_form1():
     West Visayas State University"""
     form1.text(text)
                 
-    form1.subheader('The Decision Tree Algorithm')
-    text = """The decision tree algorithm is a supervised learning technique 
-    used for both classification and regression tasks. It works by building 
-    a tree-like model with:
-    \nNodes: These represent features (or questions) from your data.
-    \nBranches: These represent the possible answers to those features (like "yes" or "no").
-    \nLeaves: These represent the final predictions (like "spam" or "not spam").
-    \nThe algorithm builds the tree by recursively splitting the data based on 
-    the feature that best separates the data points into distinct groups. 
-    This process continues until the data points at each leaf are sufficiently 
-    similar, or some other stopping criteria is met."""
+    form1.subheader('Binary Classification: Loan Repayment Prediction')
+    form1.write('Task:')
+    text = """Develop a model to predict whether a loan applicant will repay 
+    their loan in full (positive class) or default (negative class) based 
+    on historical data."""
+    form1.write(text)
+    form1.write('Algorithms')
+
+    text = """Decision Tree: This algorithm creates a tree-like structure where 
+    each node represents a decision point based on a specific feature 
+    (e.g., income, credit score). Data is split at each node based on a
+    split point, leading to leaves representing the predicted class (repay 
+    or default) for specific data points.
+    In the loan repayment context, the decision tree might split borrowers
+    based on initial payment at the root node, then further split by credit score 
+    at subsequent nodes until reaching a leaf node (repay or default) for 
+    each borrower type.
+    \nRandom Forest: This ensemble method builds on decision trees. It trains 
+    multiple decision trees with some key differences:
+    \nBootstrapping: Each tree uses a random sample (with replacement) of the 
+    original data, increasing diversity among trees.
+    \nFeature Randomness: At each split point, only a random subset of features 
+    is considered, further diversifying tree predictions. For loan prediction, 
+    the random forest would train multiple decision trees, each analyzing 
+    different subsets of borrowers and features, ultimately aggregating their 
+    predictions (e.g., majority vote) for a final classification.
+    \nExtra Trees Forest: Similar to the random forest, it builds an ensemble of 
+    decision trees. However, two key differences exist: No Bootstrapping: All data 
+    points are used to train each tree, potentially leading to less diverse predictions 
+    than the random forest. Random Split Points: At each split point, a random split 
+    point is chosen from among all possible values of the chosen feature, further 
+    differentiating it from the random forest. The extra trees forest would also 
+    train multiple decision trees, but without the randomness in feature selection 
+    and data sampling present in the random forest. It would then combine the predictions 
+    from these trees for the final classification."""
     form1.write(text)
 
     form1.write('Loan Repayment Dataset')
